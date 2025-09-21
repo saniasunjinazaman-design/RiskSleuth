@@ -26,15 +26,6 @@ Launch RiskSleuth → it parses the logs and checks them against the risk rules.
 
 Generates a risk report with identified issues, severity levels, and remediation steps.
 
-📂 Output File System
-Results_output/
-   └─ <target>_<timestamp>/
-         ├─ raw/
-         │    ├─ nmap.txt
-         │    ├─ whatweb.txt
-         │    └─ nikto.txt
-         ├─ report.json   # machine-readable findings
-         └─ report.md     # human-friendly summary
 
 🎯 Purpose
 
