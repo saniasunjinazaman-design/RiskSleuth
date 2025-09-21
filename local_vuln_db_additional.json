@@ -1,0 +1,252 @@
+{
+  "open_ftp": {
+    "score": 5,
+    "note": "FTP service discovered and appears to accept connections.",
+    "recommendation": "Disable FTP or restrict access; use SFTP/FTPS instead."
+  },
+  "anonymous_ftp": {
+    "score": 7,
+    "note": "Anonymous FTP access allowed — files may be uploaded/downloaded anonymously.",
+    "recommendation": "Disable anonymous login; require authenticated access and audit files."
+  },
+  "ftp_server": {
+    "score": 4,
+    "note": "General FTP server found (cleartext credentials risk).",
+    "recommendation": "Replace with secure transfer (SFTP/FTPS) and enforce strong auth."
+  },
+  "rdp_enabled": {
+    "score": 7,
+    "note": "RDP service exposed — high-value target for lateral movement.",
+    "recommendation": "Restrict RDP via firewall/VPN; enforce NLA and MFA for users."
+  },
+  "rdp_nla_missing": {
+    "score": 8,
+    "note": "RDP without Network Level Authentication (NLA) is enabled.",
+    "recommendation": "Enable NLA and require updated RDP clients to reduce pre-auth risks."
+  },
+  "smb_v1": {
+    "score": 10,
+    "note": "SMBv1 detected — legacy protocol with known critical vulnerabilities (e.g., EternalBlue).",
+    "recommendation": "Disable SMBv1 immediately; migrate to SMBv2/3 and patch systems."
+  },
+  "smb_anonymous": {
+    "score": 8,
+    "note": "SMB shares accessible anonymously or with weak permissions.",
+    "recommendation": "Harden share ACLs; remove anonymous access; review file permissions."
+  },
+  "smb_signing_disabled": {
+    "score": 6,
+    "note": "SMB signing disabled — risk of man-in-the-middle tampering.",
+    "recommendation": "Enable SMB signing and apply group policy controls."
+  },
+  "netbios": {
+    "score": 3,
+    "note": "NetBIOS/NetBT exposed — information leakage risk on network names/services.",
+    "recommendation": "Limit exposure on WAN; block NetBIOS at network perimeter."
+  },
+  "telnet": {
+    "score": 9,
+    "note": "Telnet service detected (clear-text credentials).",
+    "recommendation": "Disable Telnet; use SSH and enforce strong keys/passwords."
+  },
+  "ftp_plain": {
+    "score": 6,
+    "note": "Unencrypted FTP transfers detected (cleartext credentials/data).",
+    "recommendation": "Use encrypted protocols (SFTP/FTPS); rotate credentials."
+  },
+  "smtp_open_relay": {
+    "score": 8,
+    "note": "SMTP open relay detected — could be used for spam/abuse.",
+    "recommendation": "Disable relay for unauthenticated users; enforce auth and ACLs."
+  },
+  "smtp_starttls_missing": {
+    "score": 4,
+    "note": "SMTP server does not support STARTTLS — mails may be in clear text.",
+    "recommendation": "Enable STARTTLS and enforce opportunistic TLS or MTA-STS where possible."
+  },
+  "dns_zone_transfer": {
+    "score": 9,
+    "note": "DNS zone transfer (AXFR) allowed — full zone data can be retrieved.",
+    "recommendation": "Restrict AXFR to authorized IPs or disable zone transfers publicly."
+  },
+  "dns_srv_misconfig": {
+    "score": 5,
+    "note": "Suspicious or misconfigured DNS SRV records found.",
+    "recommendation": "Review SRV records and only publish necessary services."
+  },
+  "sslv3_detected": {
+    "score": 10,
+    "note": "SSLv3 protocol detected — insecure and deprecated (POODLE risk).",
+    "recommendation": "Disable SSLv3; support TLS 1.2/1.3 only and update server configs."
+  },
+  "tls1_0_detected": {
+    "score": 7,
+    "note": "TLS 1.0 detected — deprecated and weak against modern attacks.",
+    "recommendation": "Disable TLS 1.0/1.1; prefer TLS 1.2+ or TLS 1.3."
+  },
+  "weak_cipher_rc4": {
+    "score": 8,
+    "note": "RC4 or other weak ciphers enabled in TLS configuration.",
+    "recommendation": "Remove RC4 and other weak ciphers from server configs."
+  },
+  "weak_cipher_des": {
+    "score": 8,
+    "note": "DES/3DES ciphers present — collision/weakness risks.",
+    "recommendation": "Disable DES/3DES and use AES-GCM suites or ChaCha20-Poly1305."
+  },
+  "weak_dh_params": {
+    "score": 6,
+    "note": "Diffie-Hellman parameters are weak (small key size) — vulnerable to Logjam.",
+    "recommendation": "Use strong DH parameters (2048+), prefer ECDHE, and update TLS stacks."
+  },
+  "self_signed_cert": {
+    "score": 5,
+    "note": "Self-signed certificate detected — trust & MITM risk.",
+    "recommendation": "Replace with CA-signed certificates or internal PKI with trust controls."
+  },
+  "expired_cert": {
+    "score": 7,
+    "note": "SSL/TLS certificate expired — users may see errors and trust is broken.",
+    "recommendation": "Renew the certificate and verify the full chain and SANs."
+  },
+  "wildcard_cert": {
+    "score": 4,
+    "note": "Wildcard certificate in use — broader impact if compromised.",
+    "recommendation": "Consider limiting wildcard usage; rotate private keys and monitor usage."
+  },
+  "cert_name_mismatch": {
+    "score": 6,
+    "note": "Certificate common name or SAN does not match host name.",
+    "recommendation": "Issue correct certificates for each host or include proper SANs."
+  },
+  "hsts_missing": {
+    "score": 4,
+    "note": "HTTP Strict Transport Security (HSTS) header missing.",
+    "recommendation": "Enable HSTS with an appropriate max-age and preload considerations."
+  },
+  "csp_missing": {
+    "score": 5,
+    "note": "Content-Security-Policy header absent — XSS mitigation weakened.",
+    "recommendation": "Define and deploy a strict CSP appropriate for the application."
+  },
+  "x_frame_options_missing": {
+    "score": 3,
+    "note": "X-Frame-Options header missing — clickjacking risk.",
+    "recommendation": "Add X-Frame-Options or CSP frame-ancestors to prevent framing."
+  },
+  "x_content_type_options_missing": {
+    "score": 3,
+    "note": "X-Content-Type-Options header missing — MIME sniffing risk.",
+    "recommendation": "Add 'X-Content-Type-Options: nosniff' to responses."
+  },
+  "nosniff_missing": {
+    "score": 3,
+    "note": "Response headers do not include nosniff directive.",
+    "recommendation": "Add 'X-Content-Type-Options: nosniff' to reduce content sniffing."
+  },
+  "secure_cookie_missing": {
+    "score": 4,
+    "note": "Cookies missing Secure flag — may be sent over HTTP.",
+    "recommendation": "Set 'Secure' on cookies to ensure transmission only over TLS."
+  },
+  "samesite_missing": {
+    "score": 3,
+    "note": "Cookies do not specify SameSite attribute — CSRF risk.",
+    "recommendation": "Set SameSite to Lax or Strict where applicable."
+  },
+  "cors_wildcard": {
+    "score": 8,
+    "note": "CORS configured with wildcard '*' — allows any origin.",
+    "recommendation": "Restrict allowed origins to specific trusted domains."
+  },
+  "cors_allow_credentials": {
+    "score": 9,
+    "note": "CORS allows credentials and uses permissive origin — sensitive data risk.",
+    "recommendation": "Do not combine Access-Control-Allow-Credentials with wildcard origin."
+  },
+  "http_methods_insecure": {
+    "score": 6,
+    "note": "HTTP methods like PUT/DELETE/TRACE/OPTIONS appear allowed and may be risky.",
+    "recommendation": "Disable unsafe methods unless required and audit each one."
+  },
+  "directory_traversal_evidence": {
+    "score": 9,
+    "note": "Evidence of directory traversal or path disclosure in responses.",
+    "recommendation": "Fix input sanitization and validate file path operations server-side."
+  },
+  "public_git": {
+    "score": 9,
+    "note": "Public /.git or Git metadata exposed — source code and secrets risk.",
+    "recommendation": "Remove .git from webroot and audit repository for leaked secrets."
+  },
+  "exposed_git_config": {
+    "score": 7,
+    "note": ".git/config or .git/HEAD files accessible — repository info leaked.",
+    "recommendation": "Remove or restrict access to Git metadata on production servers."
+  },
+  "exposed_env": {
+    "score": 10,
+    "note": ".env or environment config file exposed — secrets may be leaked.",
+    "recommendation": "Remove .env from public webroot; rotate any leaked keys immediately."
+  },
+  "exposed_htpasswd": {
+    "score": 6,
+    "note": ".htpasswd or similar credential files exposed.",
+    "recommendation": "Move auth files outside webroot and use proper access controls."
+  },
+  "backup_files_found": {
+    "score": 6,
+    "note": "Backup or dump files (.bak, .sql, .zip) found in webroots.",
+    "recommendation": "Remove backups from public paths and store encrypted backups offsite."
+  },
+  "sitemap_disclosure": {
+    "score": 3,
+    "note": "sitemap.xml found — may reveal sensitive endpoints.",
+    "recommendation": "Review sitemap contents and exclude sensitive internal URLs."
+  },
+  "robots_sensitive_disclosure": {
+    "score": 4,
+    "note": "robots.txt lists sensitive paths or admin URLs.",
+    "recommendation": "Avoid listing sensitive paths in robots; restrict access properly."
+  },
+  "debug_mode_enabled": {
+    "score": 8,
+    "note": "Debug / development mode appears enabled — verbose info leakage.",
+    "recommendation": "Disable debug mode in production and audit logs for leaked data."
+  },
+  "verbose_error_messages": {
+    "score": 5,
+    "note": "Server error pages show stack traces or detailed info.",
+    "recommendation": "Return sanitized error messages; log details server-side only."
+  },
+  "sql_error_messages": {
+    "score": 7,
+    "note": "SQL errors present in output — can reveal DB structure.",
+    "recommendation": "Handle DB errors gracefully and avoid exposing raw SQL in responses."
+  },
+  "idor_possible": {
+    "score": 8,
+    "note": "Patterns suggesting Insecure Direct Object References (IDOR) found.",
+    "recommendation": "Implement authorization checks on object access and use opaque IDs."
+  },
+  "insecure_file_upload": {
+    "score": 9,
+    "note": "File upload endpoints accept unvalidated files — potential RCE or defacement.",
+    "recommendation": "Validate file types, apply virus scanning, and store uploads outside webroot."
+  },
+  "insecure_deserialization": {
+    "score": 10,
+    "note": "Signs of insecure deserialization or eval-like constructs detected.",
+    "recommendation": "Avoid unsafe deserialization; use safe parsers and validate inputs."
+  },
+  "xxe_detected": {
+    "score": 9,
+    "note": "Evidence of XML External Entity (XXE) processing in responses.",
+    "recommendation": "Disable external entity resolution and validate/parsing libraries."
+  },
+  "clickjacking_possible": {
+    "score": 5,
+    "note": "No protections detected; pages may be framed by other sites.",
+    "recommendation": "Add X-Frame-Options or CSP frame-ancestors to prevent framing."
+  }
+}
